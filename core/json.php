@@ -14,7 +14,7 @@ Class Json {
         );
 
         // If ajax request
-        if ($post->isAjaxRequest) {
+        if ($post->ajaxParams) {
             // Print ajax data
             $this->printJSON($data);
         }
@@ -44,7 +44,7 @@ Class Json {
     private function printErrorHTML($data) {
         echo "<h1>Voi koira!</h1>";
         echo "<h3>Tapahtui seuraava virhe:</h3>";
-        echo $data;
+        echo "<pre>" . $data . "</pre>";
     }
 }
 

@@ -12,6 +12,7 @@ Class User {
         // Globals
         global $database;
         global $post;
+        global $ajax;
 
         // Get filekey
         $this->filekey = $post->getFilekey();
@@ -26,7 +27,7 @@ Class User {
         $this->userid = $userid;
 
         // If not ajax, nothing to do anymore
-        if (!$ajax->active) {
+        if (!$post->ajaxParams) {
             return True;
         }
 
@@ -51,5 +52,8 @@ Class User {
         new Json($error, false);
     }
 }
+
+// Instantiate
+$user = new User();
 
 ?>

@@ -4,22 +4,25 @@
 Class Post {
 
     // If ajax requests
-    public $isAjaxRequest;
+    public $ajaxParams;
 
     // Ajax construction
     public function __construct() {
         // Check if ajax request
-        $this->isAjaxRequest = $this->isAjaxRequest();
+        $this->ajaxParams = &$this->getAjaxParams();
     }
 
     // Check if request is ajax or not
-    private function isAjaxRequest() {
+    private function &getAjaxParams() {
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'POST':
-                return true;
+                return $_POST;
                 break;
 
             case 'GET':
+                if (isset($_GET["method"])) {
+                    return $_GET;
+                }
                 return false;
                 break;
 
@@ -31,7 +34,15 @@ Class Post {
 
     // Get filekey from post variable
     public function getFilekey() {
-        $filekey = $this->getParameter("filekey");
+        // Globals
+        global $generation;
+
+        // If filekey is not given, generate new onw
+        if (!$filekey = $this->getParameter("filekey", false)) {
+            $filekey = $generation->getRandomString(32, true);
+        }
+
+        // Check key length
         $filekey = $this->getStr($filekey, 32, 32);
 
         return $filekey;
@@ -79,16 +90,21 @@ Class Post {
         return $int;
     }
 
-    private function getParameter($param) {
-        if (!isset($_POST[$param])) {
-            $this->getError("notset");
+    private function getParameter($param, $require = true) {
+        if (!isset($this->ajaxParams[$param])) {
+            if ($require) {
+                $this->getError("notset");
+            }
+            else {
+                return false;
+            }
         }
 
-        if (strlen($_POST[$param]) === 0) {
+        if (strlen($this->ajaxParams[$param]) === 0) {
             $this->getError("novalue");
         }
 
-        return $_POST[$param];
+        return $this->ajaxParams[$param];
     }
 
     // Error printer

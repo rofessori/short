@@ -30,8 +30,42 @@ Class Database {
 
 
     // Get funcitons
+    public function getUserByFilekey($filekey) {
+        // Query to select user id
+       $query = "SELECT id FROM kjeh_users WHERE filekey = :filekey";
+
+       // Prepare
+       $stmt = $this->connection->prepare($query);
+       $stmt->bindParam(':filekey', $filekey);
+
+       // Execute
+       if ($stmt->execute() === false) {
+           return false;
+       }
+
+       // Fetch
+       $userinfo = $stmt->fetch(PDO::FETCH_ASSOC);
+
+       return $userinfo;
+    }
+
 
     // Add functions
+    public function addUser($filekey) {
+        // Query to add work to database
+        $query = "INSERT INTO kjeh_users (filekey) VALUES (:filekey);";
+
+        // Prepare
+        $stmt = $this->connection->prepare($query);
+        $stmt->bindParam(':filekey', $filekey);
+
+        // Execute
+        if ($stmt->execute() === false) {
+            return false;
+        }
+
+        return ($stmt->rowCount());
+    }
 
     // Update functions
 

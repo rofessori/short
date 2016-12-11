@@ -4,5 +4,3 @@
 require_once("core/library.php");
 
 ?>
-
-toimii, ehkä

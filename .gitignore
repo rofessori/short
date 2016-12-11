@@ -4,6 +4,8 @@ core/config.php
 # rnd
 php5.fcgi
 .well-known/
+tests/
+files/
 
 # Windows image file caches
 Thumbs.db
