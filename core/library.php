@@ -11,20 +11,23 @@ if ($config->debug->showerrors) {
 
 // Require other core files
 require_once("json.php");
+require_once("error.php");
+require_once("check.php");
+require_once("cookie.php");
 require_once("post.php");
 require_once("database.php");
 require_once("generation.php");
 require_once("ajax.php");
 require_once("user.php");
+require_once("web.php");
 
 
 // Headers
-if ($post->ajaxType) {
+if ($post->ajaxParams) {
     header('Content-Type: application/json');
 }
 else {
     header('Content-Type: text/html;');
 }
-
 
 ?>

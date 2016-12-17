@@ -14,29 +14,23 @@ Class Ajax {
     // Method checker
     private function methodExists($method) {
         if (!method_exists($this, $method)) {
-            new Json("Virheellinen pyyntö!", false);
+            new Error($this, "invalid");
         }
 
         // Check from blacklist functions
         $blacklist = array("methodCall", "methodExists");
         if (in_array($method, $blacklist)) {
-            new Json("Virheellinen pyyntö!", false);
+            new Error($this, "invalid");
         }
     }
 
     // Methods
-    private function getUserCalendar() {
-        $data = array(
-            "tässä" => "on",
-            "paljon" => "tietoa"
-        );
+    public function getRedirect() {
 
-        // Echo results
-        new Json($data, true);
     }
 }
 
 // Instantiate
-$ajax = new Ajax();
+$ajax = new Ajax;
 
 ?>

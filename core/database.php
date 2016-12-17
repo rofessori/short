@@ -23,13 +23,15 @@ Class Database {
 
         }
         catch(PDOException $e) {
-            $this->getError("connection");
+            new Error($this, "connection");
         }
     }
 
 
 
     // Get funcitons
+
+    // Get user id with filekey
     public function getUserByFilekey($filekey) {
         // Query to select user id
        $query = "SELECT id FROM kjeh_users WHERE filekey = :filekey";
@@ -40,7 +42,7 @@ Class Database {
 
        // Execute
        if ($stmt->execute() === false) {
-           return false;
+           new Error($this, "execution");
        }
 
        // Fetch
@@ -51,6 +53,8 @@ Class Database {
 
 
     // Add functions
+
+    // Add new user
     public function addUser($filekey) {
         // Query to add work to database
         $query = "INSERT INTO kjeh_users (filekey) VALUES (:filekey);";
@@ -61,37 +65,22 @@ Class Database {
 
         // Execute
         if ($stmt->execute() === false) {
-            return false;
+            new Error($this, "execution");
         }
 
         return ($stmt->rowCount());
     }
 
+
+
     // Update functions
+
+
 
     // Del functions
 
+    
 
-
-    // Error printer
-    private function getError($type) {
-        switch ($type) {
-            case "connection":
-                $error = "Yhteyttä tietokantapalvelimeen ei voitu muodostaa!";
-                break;
-
-            case "execution":
-                $error = "Toimintoa ei voitu suorittaa tietokantavirheen vuoksi!";
-                break;
-
-            default:
-                $error = "Tuntematon tietokantavirhe!";
-                break;
-        }
-
-        // Print error
-        new Json($error, false);
-    }
 }
 
 // Instantiate

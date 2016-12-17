@@ -28,6 +28,6 @@ Class Generation {
 }
 
 // Instantiate
-$generation = new Generation();
+$generation = new Generation;
 
 ?>

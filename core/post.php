@@ -9,11 +9,11 @@ Class Post {
     // Ajax construction
     public function __construct() {
         // Check if ajax request
-        $this->ajaxParams = &$this->getAjaxParams();
+        $this->ajaxParams = $this->getAjaxParams();
     }
 
     // Check if request is ajax or not
-    private function &getAjaxParams() {
+    private function getAjaxParams() {
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'POST':
                 return $_POST;
@@ -27,7 +27,7 @@ Class Post {
                 break;
 
             default:
-                $this->getError("requestmethod");
+                new Error($this, "requestmethod");
                 break;
         }
     }
@@ -35,15 +35,22 @@ Class Post {
     // Get filekey from post variable
     public function getFilekey() {
         // Globals
-        global $generation;
+        global $check;
 
-        // If filekey is not given, generate new onw
+        // If filekey is not given, check from cookies, else generate new
         if (!$filekey = $this->getParameter("filekey", false)) {
-            $filekey = $generation->getRandomString(32, true);
+            return false;
         }
 
         // Check key length
-        $filekey = $this->getStr($filekey, 32, 32);
+        if (!$filekey = $check->getStr($filekey, 32, 32, false)) {
+            return false;
+        }
+
+        // Check key characters
+        if (!$check->checkKey($filekey, false)) {
+            return false;
+        }
 
         return $filekey;
     }
@@ -55,45 +62,11 @@ Class Post {
         return $method;
     }
 
-    // Format checking functions
-    private function getStr($str, $minlen = NULL, $maxlen = NULL) {
-        if (!is_string($str)) {
-            $this->getError("wrongtype");
-        }
-
-        if (!is_null($minlen) && $minlen > strlen($str)) {
-            $this->getError("tooshort");
-        }
-
-        if (!is_null($maxlen) && $maxlen < strlen($str)) {
-            $this->getError("toolong");
-        }
-
-        return $str;
-    }
-
-    private function getInt($int, $min = NULL, $max = NULL) {
-        if (!ctype_digit($int)) {
-            $this->getError("wrongtype");
-        }
-
-        $int = intval($int);
-
-        if (!is_null($min) && $min > $int) {
-            $this->getError("toosmall");
-        }
-
-        if (!is_null($max) && $max < $int) {
-            $this->getError("toolarge");
-        }
-
-        return $int;
-    }
-
+    // Get parameter
     private function getParameter($param, $require = true) {
         if (!isset($this->ajaxParams[$param])) {
             if ($require) {
-                $this->getError("notset");
+                new Error($this, "notset");
             }
             else {
                 return false;
@@ -101,54 +74,17 @@ Class Post {
         }
 
         if (strlen($this->ajaxParams[$param]) === 0) {
-            $this->getError("novalue");
+            new Error($this, "novalue");
         }
 
         return $this->ajaxParams[$param];
     }
 
-    // Error printer
-    private function getError($type) {
-        switch ($type) {
-            case "requestmethod":
-                $error = "Virheellinen pyyntö!";
-                break;
 
-            case "notset":
-                $error = "Tarvittavaa parametria ei annettu!";
-                break;
 
-            case "novalue":
-                $error = "Parametrilla ei ole arvoa!";
-                break;
-
-            case "wrongtype":
-                $error = "Parametrin arvo on väärää muotoa!";
-                break;
-
-            case "toolong":
-                $error = "Parametrin arvo on liian pitkä!";
-                break;
-
-            case "tooshort":
-                $error = "Parametrin arvo on liian lyhyt!";
-                break;
-
-            case "toolarge":
-                $error = "Parametrin arvo on liian suuri!";
-                break;
-
-            case "toosmall":
-                $error = "Parametrin arvo on liian pieni!";
-                break;
-
-            default:
-                $error = "Tuntematon parametrivirhe!";
-                break;
-        }
-
-        // Print error
-        new Json($error, false);
+    // Get errorcode
+    public function getErrorCode() {
+        return (isset($_GET["errorcode"]) ? $_GET["errorcode"] : false);
     }
 }
 

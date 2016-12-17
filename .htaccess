@@ -1,9 +1,19 @@
 Options +Multiviews
 
+DirectoryIndex pages/app.php
+
 RewriteEngine On
 RewriteCond %{ENV:HTTPS} !=on
 RewriteCond %{REQUEST_URI} !^/?\.well-known/acme-challenge/
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NC]
 
 RewriteRule ^([a-zA-Z]{2})([a-zA-Z]{3})$ files/$1/$1$2/$1$2 [L]
-RewriteRule ^([a-zA-Z0-9]{5})$ index.php?method=getRedirect&uid=$1 [L]
+RewriteRule ^([a-zA-Z0-9]{5})$ pages/app.php?method=getRedirect&uid=$1 [L]
+
+RewriteRule ^([0-9]{3})$ pages/pages.php?errorcode=$1 [L]
+
+RewriteRule ^favicon\.ico$ /src/icon/favicon.ico [L]
+
+ErrorDocument 403 /403
+ErrorDocument 404 /404
+ErrorDocument 500 /500

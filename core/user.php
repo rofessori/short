@@ -4,7 +4,7 @@
 Class User {
 
     private $filekey;
-    private $id;
+    private $userid;
 
     // Construct user
     public function __construct() {
@@ -13,9 +13,32 @@ Class User {
         global $database;
         global $post;
         global $ajax;
+        global $generation;
+        global $cookie;
 
         // Get filekey
-        $this->filekey = $post->getFilekey();
+        $postkey = $post->getFilekey();
+        $cookiekey = $cookie->getFilekey();
+
+        // If both false
+        if (!$postkey && !$cookiekey) {
+            $this->filekey = $generation->getRandomString(32, true);
+        }
+        // If postkey is true
+        else if ($postkey) {
+            $this->filekey = $postkey;
+        }
+        // If cookiekey is true
+        else {
+            $this->filekey = $cookiekey;
+        }
+
+        // Set cookie if not set
+        if (!$cookiekey) {
+            $cookie->setCookie("filekey", $this->filekey);
+        }
+
+
 
         // Check if user exists
         while (!$userid = $database->getUserByFilekey($this->filekey)) {
@@ -25,35 +48,10 @@ Class User {
 
         // Set userid
         $this->userid = $userid;
-
-        // If not ajax, nothing to do anymore
-        if (!$post->ajaxParams) {
-            return True;
-        }
-
-        // Get method
-        $method = $post->getMethod();
-
-        // Call method
-        $ajax->methodCall($method);
-
-    }
-
-    // Error printer
-    private function getError($type) {
-        switch ($type) {
-
-            default:
-                $error = "Tuntematon käyttäjävirhe!";
-                break;
-        }
-
-        // Print error
-        new Json($error, false);
     }
 }
 
 // Instantiate
-$user = new User();
+$user = new User;
 
 ?>
