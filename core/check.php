@@ -84,6 +84,21 @@ Class Check {
         return true;
     }
 
+    public function checkFileExtension($ext) {
+        $illegal = [
+            "php", "php3", "php4", "phtml", "pl",
+            "py", "jsp", "asp", "htm", "html",
+            "shtml", "sh", "cgi"
+        ];
+
+        return in_array($ext, $illegal) ? "txt" : $ext;
+
+    }
+
+    public function checkAlphanumeric($str) {
+        return preg_replace("/[^A-Za-z0-9]/", '', $str);
+    }
+
 }
 
 // Instantiate

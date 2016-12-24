@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS `kjeh_files` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(5) NOT NULL,
   `userid` int(11) NOT NULL,
-  `filetype` int(11) NOT NULL,
+  `filetype` varchar(32) NOT NULL,
   `filesize` int(11) NOT NULL,
   `edited` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,

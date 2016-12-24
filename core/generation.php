@@ -17,6 +17,7 @@ Class Generation {
         return $hash;
     }
 
+    // Character replacement
     public function strPrettify($str) {
         $old = "abcdef0123456789";
         $new = "aitneslokupvrjhy";
@@ -25,6 +26,35 @@ Class Generation {
 
         return $str;
     }
+
+    // Generate uid
+    public function getRandomUid($file = true) {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        // Get uid array
+        $uidarr = [];
+
+        // Generate 5 random characters
+        for ($i = 0; $i < 5; $i++) {
+            // If not file, first one is number
+            if (!$i && !$file) {
+                $uidarr[] = rand() % 10;
+                continue;
+            }
+            $uidarr[] = $chars[rand() % strlen($chars)];
+        }
+
+        // Shuffle
+        shuffle($uidarr);
+
+        // Get uid str
+        $uid = implode($uidarr);
+
+        return $uid;
+
+    }
+
+
 }
 
 // Instantiate

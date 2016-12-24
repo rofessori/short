@@ -3,8 +3,8 @@
 // User class
 Class User {
 
-    private $filekey;
-    private $userid;
+    public $filekey;
+    public $id;
 
     // Construct user
     public function __construct() {
@@ -41,13 +41,13 @@ Class User {
 
 
         // Check if user exists
-        while (!$userid = $database->getUserByFilekey($this->filekey)) {
-            # No user, create one
+        while (!$userdata = $database->getUserByFilekey($this->filekey)) {
+            // No user, create one
             $database->addUser($this->filekey);
         }
 
         // Set userid
-        $this->userid = $userid;
+        $this->id = $userdata["id"];
     }
 }
 

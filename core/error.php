@@ -34,6 +34,15 @@ Class Error {
         "Cookies" => array(
             "notset" => "Virheelliset evästeet!",
             "novalue" => "Virheellinen evästeen arvo!"
+        ),
+        "File" => array(
+            "nofound" => "Tiedostoa ei löydy!",
+            "nofile" => "Tiedostoa ei lähetetty!",
+            "toobig" => "Tiedosto on liian suuri!",
+            "partial" => "Tiedostn lähetys ei onnistunut kokonaan!",
+            "upload" => "Tiedostn lähetys ei onnistunut!",
+            "unique" => "Tiedoston osoitetta ei voitu luoda!",
+            "invalid" => "Virheellinen tiedostopääte!"
         )
 
     );
@@ -59,6 +68,9 @@ Class Error {
         if (!array_key_exists($this->error, $this->errormessages[$this->class])) {
             new Error($this, "nomessage");
         }
+
+        // Set http status code
+        http_response_code(400);
 
         // Print error
         $message = $this->errormessages[$this->class][$this->error];

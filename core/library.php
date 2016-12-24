@@ -18,6 +18,7 @@ require_once("post.php");
 require_once("database.php");
 require_once("generation.php");
 require_once("ajax.php");
+require_once("file.php");
 require_once("user.php");
 require_once("web.php");
 

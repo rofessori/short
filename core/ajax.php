@@ -28,6 +28,17 @@ Class Ajax {
     public function getRedirect() {
 
     }
+
+    // Post new file
+    public function postFile() {
+        // Globals
+        $file = new File;
+
+        $payload = "https://kjeh.fi/" . $file->uid;
+
+        new Json($payload, true);
+
+    }
 }
 
 // Instantiate

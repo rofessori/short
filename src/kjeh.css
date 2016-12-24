@@ -1,0 +1,87 @@
+* {
+	/*border: 1px solid #f00;*/
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+
+    font-family: 'Noto Sans', sans-serif;
+	font-weight: 100;
+
+	color: #ddd;
+
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('/src/bootstrap/fonts/glyphicons-halflings-regular.eot');
+  src: url('/src/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/src/bootstrap/fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('/src/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'), url('/src/bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('/src/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+/* Main */
+
+.container-main {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+/* Tools */
+
+.graytext {
+	color: #666;
+}
+
+.nolink, .nolink:visited {
+	color: #ddd;
+	text-decoration: none !important;
+}
+
+.nolink:hover, .nolink:active, .nolink:focus {
+	color: #fff;
+	text-decoration: none !important;
+}
+
+.shadowlink, .shadowlink:visited {
+	color: #666;
+	text-decoration: none !important;
+}
+
+.shadowlink:hover, .shadowlink:active, .shadowlink:focus {
+	color: #777;
+	text-decoration: none !important;
+}
+
+.pd-side-10-l, .pd-side-10 { padding-left: 10px; }
+.pd-side-10-r, .pd-side-10 { padding-right: 10px; }
+
+.pd-side-20-l, .pd-side-20 { padding-left: 20px; }
+.pd-side-20-r, .pd-side-20 { padding-right: 20px; }
+
+.pd-side-35-l, .pd-side-35 { padding-left: 35px; }
+.pd-side-35-r, .pd-side-35 { padding-right: 35px; }
+
+.pd-side-50-l, .pd-side-50 { padding-left: 50px; }
+.pd-side-50-r, .pd-side-50 { padding-right: 50px; }
+
+
+.pd-vert-10-t, .pd-vert-10 { padding-top: 10px; }
+.pd-vert-10-b, .pd-vert-10 { padding-bottom: 10px; }
+
+.pd-vert-20-t, .pd-vert-20 { padding-top: 20px; }
+.pd-vert-20-b, .pd-vert-20 { padding-bottom: 20px; }
+
+.pd-vert-35-t, .pd-vert-35 { padding-top: 35px; }
+.pd-vert-35-b, .pd-vert-35 { padding-bottom: 35px; }
+
+.pd-vert-50-t, .pd-vert-50 { padding-top: 50px; }
+.pd-vert-50-b, .pd-vert-50 { padding-bottom: 50px; }

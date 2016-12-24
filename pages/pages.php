@@ -22,6 +22,16 @@ switch ($errorcode) {
         break;
 }
 
-echo $errortext;
-
 ?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <?php echo $web->getHtmlHead(); ?>
+</head>
+<body>
+    <?php echo $web->getGoogleAnalytics(); ?>
+    <?php echo $errortext; ?>
+</body>
+</html>
