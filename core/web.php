@@ -2,6 +2,43 @@
 
 // Web class
 Class Web {
+
+    public $kjeh;
+    public $logourl;
+
+    private $kjehlist = array(
+        "Kjeh kjeh!",
+        "Kjäh kjäh!",
+        "Kjeh röh!",
+        "==))",
+
+        "Viinaa pittää juua!",
+        "Töihin siitä!",
+        "Saisit töihi mennä sinäki!",
+
+        array("Top kjeh!",1),
+
+        array("Mene töihin!",2),
+
+        "https://kjeh.kjeh.fi/",
+        "Olovi kolome (3)"
+    );
+
+    private $urllist = array(
+        "kjeh",
+        "top_kjeh",
+        "mene_töihin"
+    );
+
+    // Web construction
+    public function __construct() {
+        // Get random kjeh
+        $kjehobj = $this->kjehlist[rand() % count($this->kjehlist)];
+
+        $this->kjeh = is_array($kjehobj) ? $kjehobj[0] : $kjehobj;
+        $this->logourl = $this->urllist[is_array($kjehobj) ? $kjehobj[1] : 0];
+    }
+
     // Google Analytics
     public function getGoogleAnalytics() {
         return "<script>
@@ -49,6 +86,7 @@ Class Web {
 
         <link href="src/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="src/font-awesome.min.css">
+        <link rel="stylesheet" href="src/normalize.css">
         <link href="src/kjeh.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400italic,700" rel="stylesheet" type="text/css">
         <script src="src/jquery-3.1.1.min.js"></script>
@@ -57,6 +95,92 @@ Class Web {
         <script src="src/kjeh.js"></script>
         ';
     }
+
+    // Html page header
+    public function getHtmlHeader() {
+        return '
+        <div class="container-fluid container-main container-shadow pd-vert-50-b no-gutter"  style="background:#26282B; margin-top:20px;">
+            <div class="col-xs-12 pd-vert-50-t no-gutter">
+                <div class="center-block" style="display: table;">
+                    <div class="col-xs-4 text-center">
+                        <div class="center-block pd-side-10">
+                            <a href="#Etusivu" class="nolink">
+                                <img src="/src/img/' . $this->logourl . '.png" class="frontpage-logo" alt="Kjeh">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="center-block pd-side-10 text-center">
+                            <p class="frontpage-header"><a href="#Etusivu" class="nolink">Kjeh.fi</a></p>
+                            <p class="graytext">"' . $this->kjeh . '"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>';
+    }
+
+    // Html page header
+    public function getHtmlFooter() {
+        return '
+        <div class="pd-vert-50 graytext" style="width:100%;">
+            <p class="inliner center-block graytext" style="display: table;"><a href="#Etusivu" class="shadowlink">Kjeh.fi - Kynä niska kloppi ompi tehny</a></p>
+            <div class="inliner center-block pd-vert-20" style="display: table;">
+                <div class="pd-side-20 inliner">
+                    <a href="#Etusivu"><img src="/src/img/kjeh_bw.png" class="footer-logo" alt="Kjeh" title="Kjeh"></a>
+                </div>
+                <div class="pd-side-20 inliner">
+                    <a href="https://github.com/Chatne/Kjeh/"><img src="/src/img/github.png" class="footer-logo" alt="GitHub" title="GitHub"></a>
+                </div>
+            </div>
+            <p class="inliner center-block graytext" style="display: table;">© <a href="https://github.com/Chatne/" class="shadowlink" title="Kynä niska kloppi">Chatne</a> 2016</p>
+            <a href="#Projekti" class="inliner center-block shadowlink" style="display: table;">Lisätiejot rojektista</a>
+        </div>';
+    }
+
+    // Html page navbar
+    public function getHtmlNavbar() {
+        return '
+        <div class="container-fluid navbar">
+            <div class="container-main">
+                <nav class="navbar text-center">
+                    <button class="navbar-toggler hidden-sm-up nolink " type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2" aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label="Toggle navigation">&#9776;</button>
+                    <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+                        <ul class="nav navbar-nav text-center">
+                            <li class="nav-item active nav-item-container">
+                                <a class="nav-link text-center nolink" href="#Etusivu">Etusivu</a>
+                            </li>
+                            <li class="nav-item nav-item-container">
+                                <a class="nav-link text-center nolink" href="#Lataa">Lataa tiedostoja</a>
+                            </li>
+                            <li class="nav-item nav-item-container">
+                                <a class="nav-link text-center nolink" href="#Lyhenna">Lyhennä osoitteita</a>
+                            </li>
+                            <li class="nav-item nav-item-container">
+                                <a class="nav-link text-center nolink" href="#ShareX">ShareX-asetukset</a>
+                            </li>
+                            <li class="nav-item nav-item-container">
+                                <a class="nav-link text-center nolink" href="#Hallitse">Tilin hallinta</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>';
+    }
+
+    // User data functions
+    public function getFilekeyBar() {
+        // Globals
+        global $user;
+
+        return '
+        <div class="alert alert-kjeh-info">
+            Tiedot tallentuvat tilille <b>' . $user->filekey . '</b>. Asetukset ja lisätiedot <a href="#Hallitse" class="nolink">hallinnasta</a>.
+        </div>';
+
+    }
+
 
 }
 

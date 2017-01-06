@@ -33,9 +33,78 @@ html, body {
     margin-right: auto;
 }
 
+.container-shadow {
+	box-shadow: 0.33px 0.33px 0px #16171C, 0.67px 0.67px 0px #16171C, 1px 1px 0px #16171C, 1.33px 1.33px 0px #16171C, 1.67px 1.67px 0px #16171C, 2px 2px 0px #16171C, 2.33px 2.33px 0px #16171C, 2.67px 2.67px 0px #16171C, 3px 3px 0px #16171C;
+}
 
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.frontpage-header {
+    font-size: 80px;
+	margin: -10px 0 0 0;
+}
+
+
+.frontpage-logo {
+    width: 150px;
+    height: 150px;
+}
+
+.footer-logo {
+    width: 100px;
+    height: 100px;
+}
+
+.nav-item-container {
+	width: 100%;
+}
+
+@media (min-width: 576px) {
+	.nav-item-container {
+		width: 20%;
+		float: left;
+	}
+}
+
+/* Bootstrap edit */
+.nav-item {
+	margin: 0 !important;
+}
+
+b {
+	font-weight: bold !important;
+}
+
+/* Coloring */
+.alert-kjeh-info {
+	background-color: #3c3f44;
+    border-color: #242629;
+    color: #c6d1d2;
+}
 
 /* Tools */
+
+.text-center {
+	text-align: center;
+}
+
+p {
+    font-size: 20px;
+}
+
+h2 {
+	font-size: 34px;
+	margin-top: 25px;
+	margin-bottom: 20px;
+}
+
+.inliner {
+    display: inline-block;
+}
 
 .graytext {
 	color: #666;
@@ -59,6 +128,19 @@ html, body {
 .shadowlink:hover, .shadowlink:active, .shadowlink:focus {
 	color: #777;
 	text-decoration: none !important;
+}
+
+.no-gutter {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+button {
+	cursor: pointer;
+}
+
+button:focus {
+	outline:0;
 }
 
 .pd-side-10-l, .pd-side-10 { padding-left: 10px; }
