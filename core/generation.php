@@ -29,7 +29,7 @@ Class Generation {
 
     // Generate uid
     public function getRandomUid($file = true) {
-        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $chars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ";
 
         // Get uid array
         $uidarr = [];
