@@ -23,7 +23,7 @@ Class Database {
 
         }
         catch(PDOException $e) {
-            new Error($this, "connection");
+            new KjehError($this, "connection");
         }
     }
 
@@ -42,7 +42,7 @@ Class Database {
 
        // Execute
        if ($stmt->execute() === false) {
-           new Error($this, "execution");
+           new KjehError($this, "execution");
        }
 
        // Fetch
@@ -65,7 +65,7 @@ Class Database {
 
        // Execute
        if ($stmt->execute() === false) {
-           new Error($this, "execution");
+           new KjehError($this, "execution");
        }
 
        // Fetch
@@ -88,7 +88,7 @@ Class Database {
 
        // Execute
        if ($stmt->execute() === false) {
-           new Error($this, "execution");
+           new KjehError($this, "execution");
        }
 
        // Fetch
@@ -111,7 +111,7 @@ Class Database {
 
         // Execute
         if ($stmt->execute() === false) {
-            new Error($this, "execution");
+            new KjehError($this, "execution");
         }
 
         return ($stmt->rowCount());
@@ -132,7 +132,7 @@ Class Database {
 
         // Execute
         if ($stmt->execute() === false) {
-            new Error($this, "execution");
+            new KjehError($this, "execution");
         }
 
         return ($stmt->rowCount());
@@ -152,7 +152,7 @@ Class Database {
 
         // Execute
         if ($stmt->execute() === false) {
-            new Error($this, "execution");
+            new KjehError($this, "execution");
         }
 
         return ($stmt->rowCount());
@@ -182,7 +182,7 @@ Class Database {
 
         // Execute
         if ($stmt->execute() === false) {
-            new Error($this, "execution");
+            new KjehError($this, "execution");
         }
 
         return ($stmt->rowCount());

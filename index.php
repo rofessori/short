@@ -1,9 +1,10 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 // Require library
 require_once("../core/library.php");
+
+ini_set('display_errors', 1);
+ini_set()'display_startup_errors', 1;
+error_reporting(E_ALL);
 
 // If ajax, execute method
 if ($post->ajaxParams) {
@@ -50,7 +51,15 @@ else {
 
             <div id="tab-fileupload" style="display: none;">
                 <?php echo $web->getFilekeyBar(); ?>
-                Lataa
+			<div class="dragbox dragbox-sm">
+    			<div class="dragbox-text text-center">
+        			<i class="fa fa-cloud-download" aria-hidden="true"></i> Vedä tiedosto tähän
+    			</div>
+		</div>
+			<label class="btn btn-kjeh-primary" for="fileinput" style="margin-top:20px;">
+    				<input id="fileinput" type="file" name="file" style="display:none;">
+    			Valitse tiedosto
+		</label>
             </div>
 
             <div id="tab-urlshorten" style="display: none;">

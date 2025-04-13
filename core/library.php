@@ -4,7 +4,7 @@
 require_once("config.php");
 
 // Error reporting
-if ($config->debug->showerrors) {
+if ($config->showerrors) {
     ini_set('display_errors', 1);
     error_reporting(~0);
 }

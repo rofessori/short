@@ -8,7 +8,7 @@ Class Check {
     public function getStr($str, $minlen = NULL, $maxlen = NULL, $require = true) {
         if (!is_string($str)) {
             if ($require) {
-                new Error($this, "wrongtype");
+                new KjehError($this, "wrongtype");
             }
             else {
                 return false;
@@ -17,7 +17,7 @@ Class Check {
 
         if (!is_null($minlen) && $minlen > strlen($str)) {
             if ($require) {
-                new Error($this, "tooshort");
+                new KjehError($this, "tooshort");
             }
             else {
                 return false;
@@ -26,7 +26,7 @@ Class Check {
 
         if (!is_null($maxlen) && $maxlen < strlen($str)) {
             if ($require) {
-                new Error($this, "toolong");
+                new KjehError($this, "toolong");
             }
             else {
                 return false;
@@ -39,7 +39,7 @@ Class Check {
     public function getInt($int, $min = NULL, $max = NULL, $require = true) {
         if (!ctype_digit($int)) {
             if ($require) {
-                new Error($this, "wrongtype");
+                new KjehError($this, "wrongtype");
             }
             else {
                 return false;
@@ -50,7 +50,7 @@ Class Check {
 
         if (!is_null($min) && $min > $int) {
             if ($require) {
-                new Error($this, "toosmall");
+                new KjehError($this, "toosmall");
             }
             else {
                 return false;
@@ -59,7 +59,7 @@ Class Check {
 
         if (!is_null($max) && $max < $int) {
             if ($require) {
-                new Error($this, "toolarge");
+                new KjehError($this, "toolarge");
             }
             else {
                 return false;
@@ -74,7 +74,7 @@ Class Check {
         foreach (str_split($key) as $char) {
             if (strpos($allowed, $char) === false) {
                 if ($require) {
-                    new Error($this, "wrongtype");
+                    new KjehError($this, "wrongtype");
                 }
                 else {
                     return false;

@@ -14,13 +14,13 @@ Class Ajax {
     // Method checker
     private function methodExists($method) {
         if (!method_exists($this, $method)) {
-            new Error($this, "invalid");
+            new KjehError($this, "invalid");
         }
 
         // Check from blacklist functions
         $blacklist = array("methodCall", "methodExists");
         if (in_array($method, $blacklist)) {
-            new Error($this, "invalid");
+            new KjehError($this, "invalid");
         }
     }
 

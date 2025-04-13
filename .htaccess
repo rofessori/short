@@ -3,6 +3,7 @@ Options +Multiviews
 DirectoryIndex pages/app.php
 
 RewriteEngine On
+RewriteBase /
 RewriteCond %{ENV:HTTPS} !=on
 RewriteCond %{REQUEST_URI} !^/?\.well-known/acme-challenge/
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NC]

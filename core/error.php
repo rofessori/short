@@ -1,7 +1,7 @@
 <?php
 
 // Error class
-Class Error {
+Class KjehError {
 
     private $class;
     private $error;
@@ -61,12 +61,12 @@ Class Error {
     private function handleError() {
         // Check if class exists
         if (!array_key_exists($this->class, $this->errormessages)) {
-            new Error($this, "noclass");
+            new KjehError($this, "noclass");
         }
 
         // Check if error message exists
         if (!array_key_exists($this->error, $this->errormessages[$this->class])) {
-            new Error($this, "nomessage");
+            new KjehError($this, "nomessage");
         }
 
         // Set http status code

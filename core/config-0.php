@@ -5,15 +5,17 @@
 $vars = array(
     "database" => array(                // Database connection variables
         "host" => "localhost",          // Host address
-        "username" => "root",            // Username
-        "password" => "",                // Password
-        "database" => "root"             // Database name
+        "username" => "linkuser",            // Username
+        "password" => "4r1PcG40wLZDyGF",                // Password
+        "database" => "linkshortener"             // Database name
     )
 );
 
 
 // Config class
 Class Config {
+    public $debug = false;
+    public $showerrors = true;
     // Config construction
     public function __construct($vars) {
         // Loop through variables given

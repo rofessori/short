@@ -29,7 +29,7 @@ Class Cookie {
     public function getCookie($param, $require = true) {
         if (!array_key_exists($param, $_COOKIE)) {
             if ($require) {
-                new Error($this, "notset");
+                new KjehError($this, "notset");
             }
             else {
                 return false;
@@ -38,7 +38,7 @@ Class Cookie {
 
         if (strlen($_COOKIE[$param]) === 0) {
             if ($require) {
-                new Error($this, "novalue");
+                new KjehError($this, "novalue");
             }
             else {
                 return false;

@@ -27,7 +27,7 @@ Class Post {
                 break;
 
             default:
-                new Error($this, "requestmethod");
+                new KjehError($this, "requestmethod");
                 break;
         }
     }
@@ -66,7 +66,7 @@ Class Post {
     private function getParameter($param, $require = true) {
         if (!isset($this->ajaxParams[$param])) {
             if ($require) {
-                new Error($this, "notset");
+                new KjehError($this, "notset");
             }
             else {
                 return false;
@@ -74,7 +74,7 @@ Class Post {
         }
 
         if (strlen($this->ajaxParams[$param]) === 0) {
-            new Error($this, "novalue");
+            new KjehError($this, "novalue");
         }
 
         return $this->ajaxParams[$param];

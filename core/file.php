@@ -20,7 +20,7 @@ Class File {
 
         // Get data from database
         if (!$data = $database->getFileByUid($this->uid, $user->id)) {
-            new Error($this, "nofound");
+            new KjehError($this, "nofound");
         }
 
         // Set data
@@ -41,7 +41,7 @@ Class File {
 
         // Get file variable
         if (!$file = isset($_FILES["file"]) ? $_FILES["file"] : false) {
-            new Error($this, "nofile");
+            new KjehError($this, "nofile");
         }
 
         // Check file upload errors
@@ -51,22 +51,22 @@ Class File {
 
             case 1:
             case 2:
-                new Error($this, "toobig");
+                new KjehError($this, "toobig");
 
             case 3:
-                new Error($this, "partial");
+                new KjehError($this, "partial");
 
             case 4:
-                new Error($this, "nofile");
+                new KjehError($this, "nofile");
 
             default:
-                new Error($this, "upload");
+                new KjehError($this, "upload");
 
         }
 
         // Check if file exists in temp folder
         if (!file_exists($file["tmp_name"])) {
-            new Error($this, "nofile");
+            new KjehError($this, "nofile");
         }
 
 
@@ -81,13 +81,13 @@ Class File {
 
             // If not unique over 5 times
             if ($fail > 4) {
-                new Error($this, "unique");
+                new KjehError($this, "unique");
             }
         }
 
         // Get and check data
         if ($file["name"] === $ext = end((explode(".", $file["name"])))) {
-            new Error($this, "invalid");
+            new KjehError($this, "invalid");
         }
 
         // Check ext
@@ -97,12 +97,12 @@ Class File {
         $check->getStr($ext, 1, 30);
 
         if (!$size = $file["size"]) {
-            new Error($this, "nofile");
+            new KjehError($this, "nofile");
         }
 
         // Add data to database
         if (!$database->addFile($user->id, $uid, $ext, $size)) {
-            new Error($this, "nofile");
+            new KjehError($this, "nofile");
         }
 
         $path = $this->getFilePath($uid, $ext, false);
@@ -110,7 +110,7 @@ Class File {
 
         // Create folders
         if (!mkdir($path, 0777, true)) {
-            new Error($this, "folder");
+            new KjehError($this, "folder");
         }
 
         // Move file
