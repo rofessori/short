@@ -45,3 +45,24 @@ function tabHashCheck() {
     $(".tab-container > div").hide();
     $("#tab-" + tab).show();
 }
+
+$("#urlshortenbutton").on("click", function() {
+  let longUrl = $("#urlshorten-textarea").val().trim();
+  if (!longUrl) {
+    alert("Please enter a URL!");
+    return;
+  }
+  $.ajax({
+    type: "POST",
+    url: "/pages/app.php?method=shortenUrl",
+    data: { url: longUrl },
+    success: function(response) {
+      // response should be the short URL
+      $("#urllink-textarea").val(response);
+      // Switch the subtab from input to result, etc.
+    },
+    error: function() {
+      alert("Shortening failed!");
+    }
+  });
+});
